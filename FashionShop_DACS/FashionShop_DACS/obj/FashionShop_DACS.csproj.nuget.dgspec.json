@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS.csproj": {}
+    "D:\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS.csproj": {}
   },
   "projects": {
-    "C:\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS.csproj": {
+    "D:\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS.csproj",
+        "projectUniqueName": "D:\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS.csproj",
         "projectName": "FashionShop_DACS",
-        "projectPath": "C:\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS.csproj",
+        "projectPath": "D:\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS.csproj",
         "packagesPath": "C:\\Users\\tranv\\.nuget\\packages\\",
-        "outputPath": "C:\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\obj\\",
+        "outputPath": "D:\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\FashionShop_DACS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -51,6 +51,10 @@
             "MailKit": {
               "target": "Package",
               "version": "[4.6.0, )"
+            },
+            "Microsoft.AspNet.WebApi.Client": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",

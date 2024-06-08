@@ -1,98 +1,67 @@
-﻿@model IEnumerable<FashionShop_DACS.Models.Product>
+﻿@using Newtonsoft.Json
+@model IEnumerable<FashionShop_DACS.Models.Product>
 
 @{
-	ViewData["Title"] = "Home Page";
-	int numOfQuantity = 1;
+    ViewData["Title"] = "Home Page";
+    int numOfQuantity = 1;
 }
 
+<input id="searchInput" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+
 <section class="py-2">
-	<div class="container px-4 px-lg-5 mt-5">
-		<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justifycontent-center">
-
-			@foreach (var item in Model)
-			{
-				<div class="col mb-5">
-					<div class="card gap-3" style="width: 18rem">
-						<img src="@item.ImageUrl" class="card-img-top" alt="..." style="height: 300px">
-						<div class="card-body">
-							<h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
-							<div class="d-flex">
-								<span>Price: </span>
-								<p class="mx-3">@item.Price.ToString("#,##0") Vnđ</p>
-							</div>
-							<a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-productId="@item.Id"
-							   asp-route-quantity="@numOfQuantity">
-								<button class="btn btn-outline-dark"><i class="bi-cart-fill me-1"></i>Add To Cart</button>
-							</a>
-						</div>
-					</div>
-				</div>
-			}
-		</div>
-	</div>
-
-	@* <div class="col-sm-3">
-		<div class="left-sidebar">
-			<h2>Sản phẩm</h2>
-			<div class="panel-group category-products" id="accordian">
-				<!--category-productsr-->
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
-								<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-								Áo
-							</a>
-						</h4>
-					</div>
-					<div id="sportswear" class="panel-collapse collapse">
-						<div class="panel-body">
-							<ul>
-								<li><a> Áo thun </a></li>
-								<li><a> Áo Polo</a></li>
-								<li><a> Áo Hoodie</a></li>
-								<li><a> Áo sơ mi</a></li>
-								<li><a> Áo khoác </a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordian" href="#mens">
-								<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-								Quần
-							</a>
-						</h4>
-					</div>
-					<div id="mens" class="panel-collapse collapse">
-						<div class="panel-body">
-							<ul>
-								<li><a>Quần tây</a></li>
-								<li><a>Quần kaki</a></li>
-								<li><a>Quần Jeans</a></li>
-								<li><a>Quần ống rộng</a></li>
-								<li><a>Quần jogger</a></li>
-
-							</ul>
-						</div>
-					</div>
-				</div>
-
-
-			</div><!--/category-products-->
-
-
-
-			<div class="shipping text-center">
-				<!--shipping-->
-				<img src="~/images/2.jpg" class="girl img-responsive" alt="" />
-			</div><!--/shipping-->
-
-		</div>
-	</div> *@
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justifycontent-center" id="searchResults">
+            @foreach (var item in Model)
+            {
+                <div class="col mb-5">
+                    <div class="card gap-3" style="width: 18rem">
+                        <img src="@item.ImageUrl" class="card-img-top" alt="..." style="height: 300px">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                            <div class="d-flex">
+                                <span>Price: </span>
+                                <p class="mx-3">@item.Price.ToString("#,##0") Vnđ</p>
+                            </div>
+                            <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-productId="@item.Id"
+                               asp-route-quantity="@numOfQuantity">
+                                <button class="btn btn-outline-dark"><i class="bi-cart-fill me-1"></i>Add To Cart</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </section>
 
+<script>
+    var originalData = @Html.Raw(JsonConvert.SerializeObject(Model.Select(p => new { Name = p.Name, ImageUrl = p.ImageUrl }).ToList()));
+    var searchData = originalData;
 
+    document.getElementById("searchInput").addEventListener("input", function () {
+        var searchTerm = this.value.toLowerCase().trim();
+        if (searchTerm === "") {
+            displayResults(originalData);
+            return;
+        }
+        var results = searchData.filter(function (item) {
+            return item.Name.toLowerCase().includes(searchTerm);
+        });
+        displayResults(results);
+    });
 
+    function displayResults(results) {
+        var resultList = document.getElementById("searchResults");
+        resultList.innerHTML = "";
+        for (var i = 0; i < results.length; i++) {
+            resultList.innerHTML += `<div class="col mb-5">
+                                                <div class="card gap-3" style="width: 18rem">
+                                                    <img src="${results[i].ImageUrl}" class="card-img-top" alt="..." style="height: 300px">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">${results[i].Name}</h5>
+                                                    </div>
+                                                </div>
+                                            </div>`;
+        }
+    }
+</script>

@@ -1,7 +1,10 @@
-﻿using FashionShop_DACS.Models;
+﻿using FashionShop_DACS.Helper.Abstract;
+using FashionShop_DACS.Models;
 using FashionShop_DACS.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Text;
 
 
 namespace FashionShop_DACS.Areas.Admin.Controllers
@@ -12,17 +15,27 @@ namespace FashionShop_DACS.Areas.Admin.Controllers
     {
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IHttpClientService _httpClientService;
+        private const string baseUrlCategory = "http://localhost:7091/api/Category";
 
-        public CategoryController(IProductRepository productRepository, ICategoryRepository categoryRepository)
+        public CategoryController(IProductRepository productRepository, ICategoryRepository categoryRepository, IHttpClientService httpClientService)
         {
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
+            _httpClientService = httpClientService;
         }
 
         // Hiển thị danh sách sản phẩm
         public async Task<IActionResult> Index()
         {
-            var categories = await _categoryRepository.GetAllAsync();
+            var result = await _httpClientService.GetDataAsync(baseUrlCategory);
+
+            if (string.IsNullOrEmpty(result))
+            {
+                return View(new List<Category>());
+            }
+
+            var categories = JsonConvert.DeserializeObject<List<Category>>(result);
             return View(categories);
         }
         // Hiển thị form thêm sản phẩm mới
@@ -37,7 +50,10 @@ namespace FashionShop_DACS.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _categoryRepository.AddAsync(category);
+                var content = new StringContent(JsonConvert.SerializeObject(category), Encoding.UTF8, "application/json");
+
+                await _httpClientService.PostDataAsync("http://localhost:7091/api/Category", content);
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -46,23 +62,29 @@ namespace FashionShop_DACS.Areas.Admin.Controllers
         // Hiển thị thông tin chi tiết sản phẩm
         public async Task<IActionResult> Display(int id)
         {
-            var category = await _categoryRepository.GetByIdAsync(id);
-            if (category == null)
+            var result = await _httpClientService.GetDataAsync($"{baseUrlCategory}/{id}");
+
+            if (string.IsNullOrEmpty(result))
             {
                 return NotFound();
             }
+
+            var category = JsonConvert.DeserializeObject<Category>(result);
             return View(category);
         }
 
         // Hiển thị form cập nhật sản phẩm
         public async Task<IActionResult> Update(int id)
         {
-            var product = await _categoryRepository.GetByIdAsync(id);
-            if (product == null)
+            var result = await _httpClientService.GetDataAsync($"{baseUrlCategory}/{id}");
+
+            if (string.IsNullOrEmpty(result))
             {
                 return NotFound();
             }
-            return View(product);
+
+            var category = JsonConvert.DeserializeObject<Category>(result);
+            return View(category);
         }
         // Xử lý cập nhật sản phẩm
         [HttpPost]
@@ -74,7 +96,8 @@ namespace FashionShop_DACS.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
-                await _categoryRepository.UpdateAsync(category);
+                var content = new StringContent(JsonConvert.SerializeObject(category), Encoding.UTF8, "application/json");
+                await _httpClientService.PutDataAsync(baseUrlCategory, content);
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -82,11 +105,14 @@ namespace FashionShop_DACS.Areas.Admin.Controllers
         // Hiển thị form xác nhận xóa sản phẩm
         public async Task<IActionResult> Delete(int id)
         {
-            var category = await _categoryRepository.GetByIdAsync(id);
-            if (category == null)
+            var result = await _httpClientService.GetDataAsync($"{baseUrlCategory}/{id}");
+
+            if (string.IsNullOrEmpty(result))
             {
                 return NotFound();
             }
+
+            var category = JsonConvert.DeserializeObject<Category>(result);
             return View(category);
         }
 
@@ -94,12 +120,19 @@ namespace FashionShop_DACS.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _categoryRepository.GetByIdAsync(id);
+            var category = await _httpClientService.GetDataAsync($"{baseUrlCategory}/{id}");
+
             if (category != null)
             {
-                await _categoryRepository.DeleteAsync(id);
+                await _httpClientService.DeleteDataAsync($"{baseUrlCategory}?id={id}");
             }
+
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Test1()
+        {
+            return View();
         }
     }
 }

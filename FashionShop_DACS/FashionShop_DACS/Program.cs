@@ -1,4 +1,4 @@
-using FashionShop_DACS.Models;
+Ôªøusing FashionShop_DACS.Models;
 using FashionShop_DACS.Repositories;
 using FashionShop_DACS.Models;
 using FashionShop_DACS.Repositories;
@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
+using FashionShop_DACS.Helper.Abstract;
+using FashionShop_DACS.Helper;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,10 +18,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
+// ƒêƒÉng k√Ω Identity v·ªõi ApplicationUser v√† IdentityRole
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddDefaultTokenProviders()
-        .AddDefaultUI()
-        .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders()
+    .AddDefaultUI();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -47,16 +50,17 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IProductRepository, EFProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, EFCategoryRepository>();
-
-//// ThÍm ?o?n code c?a b?n v‡o ?‚y
+builder.Services.AddScoped<IHttpClientService, HttpClientService>();
+builder.Services.AddHttpClient();
+//// Th√™m ?o?n code c?a b?n v√†o ?√¢y
 //builder.Services.AddOptions();
 //var mailsettings = builder.Configuration.GetSection("MailSettings");
 //builder.Services.Configure<MailSettings>(mailsettings);
 //builder.Services.AddSingleton<IEmailSender, SendMailService>();
 //builder.Services.Configure<IdentityOptions>(options =>
 //{
-//    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(6); // Th?i gian khÛa m?c ??nh l‡ 5 ph˙t
-//    options.Lockout.MaxFailedAccessAttempts = 5; // S? l?n ??ng nh?p th?t b?i t?i ?a tr??c khi khÛa t‡i kho?n
+//    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(6); // Th?i gian kh√≥a m?c ??nh l√† 5 ph√∫t
+//    options.Lockout.MaxFailedAccessAttempts = 5; // S? l?n ??ng nh?p th?t b?i t?i ?a tr??c khi kh√≥a t√†i kho?n
 //    options.SignIn.RequireConfirmedEmail = true;
 //});
 
