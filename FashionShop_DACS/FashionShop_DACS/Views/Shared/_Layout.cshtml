@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>@ViewData["Title"] - Fashion-Shop</title>
+	<link href="~/css/bootstrap.min.css" rel="stylesheet">
+	<link href="~/css/font-awesome.min.css" rel="stylesheet">
+	<link href="~/css/prettyPhoto.css" rel="stylesheet">
+	<link href="~/css/price-range.css" rel="stylesheet">
+	<link href="~/css/animate.css" rel="stylesheet">
+	<link href="~/css/main.css" rel="stylesheet">
+	<link href="~/css/responsive.css" rel="stylesheet">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+	<link rel="shortcut icon" href="images/ico/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+	<!-- Bootstrap icons-->
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/FashionShops_Nhom3.styles.css" asp-append-version="true" />
+
+</head><!--/head-->
+
+<body>
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+			<div class="container-fluid">
+				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Fashion Shop</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+					<ul class="navbar-nav flex-grow-1">
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Sản phẩm</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Danh mục</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Order</a>
+						</li>
+					</ul>
+					<partial name="_LoginPartial" />
+					<form class="d-flex">
+						<button class="btn btn-outline-dark" type="submit" asp-area="" asp-controller="ShoppingCart" asp-action="Index">
+							<i class="bi-cart-fill me-1"></i>
+							Cart
+						</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+
+
+	<section id="slider">
+		<!--slider-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+							<li data-target="#slider-carousel" data-slide-to="1"></li>
+							<li data-target="#slider-carousel" data-slide-to="2"></li>
+						</ol>
+
+						<div class="carousel-inner">
+							<div class="item active">
+								<div class="col-sm-6">
+									<h1><span>FASHION</span>-SHOP</h1>
+									<h2>Uy Tín Tạo Nên Thương Hiệu</h2>
+									<p>Sứ Mệnh Về Bền Vững và Chất Lượng </p>
+									<button type="button" class="btn btn-default get">Get it now</button>
+								</div>
+								<div class="col-sm-6">
+									<img src="~/images/3.jpg" alt="" />
+
+								</div>
+							</div>
+							<div class="item">
+								<div class="col-sm-6">
+									<h1><span>FASHION</span>-SHOP</h1>
+									<h2>Uy Tín Tạo Nên Thương Hiệu</h2>
+									<p>Nơi Tôn Vinh Phong Cách Cá Nhân </p>
+									<button type="button" class="btn btn-default get">Get it now</button>
+								</div>
+								<div class="col-sm-6">
+									<img src="~/images/4.jpg" class="girl img-responsive" alt="" />
+
+								</div>
+							</div>
+
+							<div class="item">
+								<div class="col-sm-6">
+									<h1><span>FASHION</span>-SHOP</h1>
+									<h2>Uy Tín Tạo Nên Thương Hiệu</h2>
+									<p>Xây Dựng Dịch Vụ Yêu Cầu Cho Khách Hàng Một Cách Tận Tâm và Chuyên Nghiệp </p>
+									<button type="button" class="btn btn-default get">Get it now</button>
+								</div>
+								<div class="col-sm-6">
+									<img src="~/images/1.jpg" class="girl img-responsive" alt="" />
+
+								</div>
+							</div>
+
+						</div>
+
+						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section><!--/slider-->
+
+	<section>
+		<div class="container">
+			<main role="main" class="pb-3">
+				@RenderBody()
+			</main>
+		</div>
+	</section>
+
+	<footer id="footer">
+		<!--Footer-->
+		<div class="footer-widget">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2> </h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2 </h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2> </h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a></a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2></h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a></a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Liên hệ</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a></a></li>
+								<li><a>Hotline: 1900 1010</a></li>
+								<li><a>Địa chỉ: Khu Công Nghệ Cao, TP Thủ Đức, TP.HCM</a></li>
+
+							</ul>
+						</div>
+					</div>
+					@* <div class="col-sm-3 col-sm-offset-1">
+					<div class="single-widget">
+					<h2>About Shopper</h2>
+					<form action="#" class="searchform">
+					<input type="text" placeholder="Your email address" />
+					<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+					<p>Get the most recent updates from <br />our site and be updated your self...</p>
+					</form>
+					</div>
+					</div> *@
+
+				</div>
+			</div>
+		</div>
+
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<p class="pull-left">Copyright © 2024 Fashion Shop</p>
+
+				</div>
+			</div>
+		</div>
+
+	</footer><!--/Footer-->
+
+
+
+	<script src="~/js/jquery.js"></script>
+	<script src="~/js/bootstrap.min.js"></script>
+	<script src="~/js/jquery.scrollUp.min.js"></script>
+	<script src="~/js/price-range.js"></script>
+	<script src="~/js/jquery.prettyPhoto.js"></script>
+	<script src="~/js/main.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

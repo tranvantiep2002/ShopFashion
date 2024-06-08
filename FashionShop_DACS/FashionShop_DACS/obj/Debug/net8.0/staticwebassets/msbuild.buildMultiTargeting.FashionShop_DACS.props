@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\FashionShop_DACS.props" />
+</Project>

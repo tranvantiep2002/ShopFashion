@@ -1,0 +1,15 @@
+﻿@model Order 
+  
+<h2>Checkout</h2> 
+  
+<form asp-action="Checkout" method="post"> 
+    <div class="form-group"> 
+        <label asp-for="ShippingAddress">Địa chỉ giao hàng</label>
+        <input asp-for="ShippingAddress" class="form-control" /> 
+    </div> 
+    <div class="form-group"> 
+        <label asp-for="Notes">Lưu ý</label> 
+        <textarea asp-for="Notes" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Place Order</button>
+</form>

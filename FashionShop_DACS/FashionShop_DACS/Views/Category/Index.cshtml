@@ -1,0 +1,39 @@
+﻿<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var category in Model)
+    {
+        <div class="col mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <style>
+                        .card {
+                            transition: transform 0.3s ease;
+                        }
+
+                            .card:hover {
+                                transform: translateY(-5px);
+                            }
+
+                        .card-title {
+                            margin-bottom: 0.5rem;
+                        }
+
+                        .card-body {
+                            flex: 1;
+                        }
+
+                        .card-footer {
+                            padding: 0.75rem 1.25rem;
+                            background-color: #f7f7f7;
+                            border-top: 1px solid #dee2e6;
+                        }
+                    </style>
+                    <h5 class="card-title">@category.Name</h5>
+                    <div class="d-flex justify-content-end">
+                        <a asp-action="Display" asp-route-id="@category.Id" class="btn btn-sm btn-outline-primary me-2">View</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
