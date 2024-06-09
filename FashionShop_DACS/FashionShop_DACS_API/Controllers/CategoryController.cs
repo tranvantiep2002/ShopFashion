@@ -1,10 +1,12 @@
 ﻿using FashionShop_DACS.Models;
 using FashionShop_DACS.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FashionShop_DACS_API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -22,6 +24,7 @@ namespace FashionShop_DACS_API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async ValueTask CreateAsync(Category category)
         {
             await _categoryRepository.AddAsync(category);
@@ -34,12 +37,14 @@ namespace FashionShop_DACS_API.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async ValueTask UpdateAsync(Category category)
         {
             await _categoryRepository.UpdateAsync(category);
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public async ValueTask DeleteAsync(int id)
         {
             await _categoryRepository.DeleteAsync(id);

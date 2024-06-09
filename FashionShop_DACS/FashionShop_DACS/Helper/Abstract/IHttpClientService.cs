@@ -2,9 +2,9 @@
 {
     public interface IHttpClientService
     {
-        Task<string> GetDataAsync(string url);
-        Task<string> PostDataAsync(string url, HttpContent content);
-        Task<string> PutDataAsync(string url, HttpContent content);
-        Task<bool> DeleteDataAsync(string url);
+        Task<string> GetDataAsync(string url, string token = null);
+        Task<string> PostDataAsync(string url, HttpContent content, string token = null);
+        Task<string> PutDataAsync(string url, HttpContent content, string token = null);
+        Task<bool> DeleteDataAsync(string url, string token = null);
     }
 }

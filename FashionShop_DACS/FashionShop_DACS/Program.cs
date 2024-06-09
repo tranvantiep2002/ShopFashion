@@ -26,7 +26,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = $"/Identity/Account/Login";
+    options.LoginPath = $"/Admin/User/Login";
     options.LogoutPath = $"/Identity/Account/Logout";
     options.LogoutPath = $"/Identity/Account/AccessDenied";
 });
@@ -48,9 +48,11 @@ builder.Services.AddSession(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<FashionShop_DACS.Helper.Abstract.IEmailSender, EmailSender>();
 builder.Services.AddScoped<IProductRepository, EFProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, EFCategoryRepository>();
 builder.Services.AddScoped<IHttpClientService, HttpClientService>();
+builder.Services.AddScoped<IOrderRepository, EFOrderRepository>();
 builder.Services.AddHttpClient();
 //// Thêm ?o?n code c?a b?n vào ?ây
 //builder.Services.AddOptions();

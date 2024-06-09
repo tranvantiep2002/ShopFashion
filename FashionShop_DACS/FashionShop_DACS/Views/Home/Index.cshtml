@@ -6,14 +6,22 @@
     int numOfQuantity = 1;
 }
 
+<!-- Thêm phần CSS vào thẻ <style> -->
+<style>
+    .card-spacing {
+        margin-bottom: 30px; /* Khoảng cách giữa các phần tử */
+    }
+</style>
+
 <input id="searchInput" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
 
 <section class="py-2">
     <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justifycontent-center" id="searchResults">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4" id="searchResults">
             @foreach (var item in Model)
             {
-                <div class="col mb-5">
+                <div class="col mb-5 card-spacing" style="margin-left: 10px">
+                    <!-- Thêm lớp card-spacing vào đây -->
                     <div class="card gap-3" style="width: 18rem">
                         <img src="@item.ImageUrl" class="card-img-top" alt="..." style="height: 300px">
                         <div class="card-body">
@@ -54,14 +62,14 @@
         var resultList = document.getElementById("searchResults");
         resultList.innerHTML = "";
         for (var i = 0; i < results.length; i++) {
-            resultList.innerHTML += `<div class="col mb-5">
-                                                <div class="card gap-3" style="width: 18rem">
-                                                    <img src="${results[i].ImageUrl}" class="card-img-top" alt="..." style="height: 300px">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">${results[i].Name}</h5>
-                                                    </div>
+            resultList.innerHTML += `<div class="col mb-5 card-spacing">
+                                            <div class="card gap-3" style="width: 18rem">
+                                                <img src="${results[i].ImageUrl}" class="card-img-top" alt="..." style="height: 300px">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${results[i].Name}</h5>
                                                 </div>
-                                            </div>`;
+                                            </div>
+                                         </div>`;
         }
     }
 </script>

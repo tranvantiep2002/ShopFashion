@@ -51,7 +51,7 @@ public class AuthController : ControllerBase
             _configuration["JwtSettings:Issuer"],
             _configuration["JwtSettings:Audience"],
             claims,
-            expires: DateTime.Now.AddMinutes(30), // Thời gian hết hạn của token
+            expires: DateTime.Now.AddHours(24), // Thời gian hết hạn của token
             signingCredentials: creds);
 
         return Ok(new

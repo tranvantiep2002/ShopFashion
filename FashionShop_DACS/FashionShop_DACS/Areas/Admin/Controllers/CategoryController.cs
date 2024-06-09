@@ -28,7 +28,7 @@ namespace FashionShop_DACS.Areas.Admin.Controllers
         // Hiển thị danh sách sản phẩm
         public async Task<IActionResult> Index()
         {
-            var result = await _httpClientService.GetDataAsync(baseUrlCategory);
+            var result = await _httpClientService.GetDataAsync(baseUrlCategory, Request.Cookies["token"]);
 
             if (string.IsNullOrEmpty(result))
             {

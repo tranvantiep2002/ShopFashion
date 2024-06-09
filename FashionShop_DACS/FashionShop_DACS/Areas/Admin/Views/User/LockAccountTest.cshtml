@@ -1,0 +1,23 @@
+﻿@using FashionShop_DACS.Models
+@model LockAccountModel
+
+@{
+    ViewData["Title"] = "LockAccountTest";
+}
+
+<h1>LockAccount</h1>
+
+<form id="account" method="post">
+    <h2>Vui lòng nhập email.</h2>
+    <hr />
+    <div class="form-floating mb-3">
+        <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+        <label asp-for="Email" class="form-label">Email</label>
+    </div>
+
+    <div>
+        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Confirm</button>
+    </div>
+
+</form>
+
